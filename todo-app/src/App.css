@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*Font Styles*/
+h1{
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top:150px;
+}
+.Container{
+width:100%;
+height:100%;
+max-width:800px;
+margin:50px auto;
+padding:20px;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+background:linear-gradient(90deg,#279FF5,#2738F5,#7D27F5);
+}
+.content{
+    display:flex;
+   
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+input[type="text"]{
+    width:80%;
+    padding:10px;
+    border:none;
+    outline: none;
+    border-radius:5px;
+    font-size:1rem;
+}
+button{
+    padding:10px 20px;
+    border:none;
+    outline:none;
+    border-radius:5px;
+    background-color:#fff;
+    color:#2738F5;
+    font-size:1rem;
+    cursor:pointer;
+    transition: background-color 0.3s ease;
+}
+.Todo-list{
+    width:100%;
+    height:auto;
+    max-width:800px;
+    justify-self: center;
+    margin-top:30px;
+    background-color:#d50909;
+    padding:20px;
+    border-radius:10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+}
+li{
+    list-style-type: decimal;
+    font-size:1.2rem;
+    color:#fff;
+    margin:10px 0 0 20px;
+}
