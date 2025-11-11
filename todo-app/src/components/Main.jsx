@@ -2,7 +2,6 @@ import { useState } from 'react';
 function Container(){
 const [tasks, setTasks] = useState([]);
 const [inputValue, setInputValue] = useState('');
-const li =document.getElementsByClassName("li");
   const Add = () => {
     if (inputValue.trim() !== '') {
       setTasks([...tasks, inputValue]);
