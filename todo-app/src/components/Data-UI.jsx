@@ -57,6 +57,7 @@ return (
       }}
     />
     <button className="set" onClick={setGoalAndHide}>Set</button>
+    
   </>
 )}
       </div></div>
