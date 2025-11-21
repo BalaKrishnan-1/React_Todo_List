@@ -4,10 +4,12 @@ import { useState } from 'react';
 const radius = 45;
 const circumference = 2 * Math.PI * radius;
 
-const progressPercentage = Math.min(100, (completed / goalMax) * 100);
+// Progress percentage based on completed tasks
+const progress =completed.length;
+const progressPercentage = Math.min(100, (progress / goalMax) * 100);
 
-const strokeDashoffset =
-  circumference - (circumference * progressPercentage) / 100;
+// Stroke offset to "cut off" the circle fill
+const strokeDashoffset = circumference * (1 - progressPercentage / 100);
 
 const[ShowGoalInput,setShowGoalInput] = useState(false);
 const setGoalAndHide = () => {
@@ -33,22 +35,30 @@ return (
             />
           </svg>
           <div className="progress-text">
-            <span className="progress-number">{completed}</span>
+            <span className="progress-number">{progress}</span>
             <span className="progress-label"> / {goalMax}</span>
           </div>
         </div>
         <p className="goal-label">Daily Goal</p>
-        <br></br>
-        {!ShowGoalInput &&(
-        <button className="goal-input" onClick={()=>setShowGoalInput(true)}>Edit Goal </button>)}
-           <input
-            type="number"
-            min="1"
-            onChange={onGoalChange}
-            value={goalMax}
-            on KeyDown={(e)=>{if(e.key==='Enter'){setGoalAndHide();}}}
-          />
-          <button className='set' onClick={setGoalAndHide}>Set</button>
+        <br />
+       {!ShowGoalInput ? (
+  <button className="goal-input" onClick={() => setShowGoalInput(true)}>
+    Edit Goal
+  </button>
+) : (
+  <>
+    <input
+      type="number"
+      min="1"
+      value={goalMax}
+      onChange={onGoalChange}
+      onKeyDown={(f) => {
+        if (f.key === 'Enter') setGoalAndHide();
+      }}
+    />
+    <button className="set" onClick={setGoalAndHide}>Set</button>
+  </>
+)}
       </div></div>
     </>
   );

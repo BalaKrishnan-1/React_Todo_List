@@ -108,7 +108,6 @@ button{
   fill: none;
   stroke: #279FF5;
   stroke-width: 7;
-  stroke-dasharray: 282.7;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease;
 }

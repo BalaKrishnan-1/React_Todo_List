@@ -4,8 +4,8 @@ import DataUI from '../components/Data-UI.jsx';
 function Container(){
 const [tasks, setTasks] = useState([]);
 const [inputValue, setInputValue] = useState('');
-const [completed, setCompleted] = useState([0]);
-const [goalMax, setGoalMax] = useState([1]);
+const [completed, setCompleted] = useState([]);
+const [goalMax, setGoalMax] = useState(1);
 
   const Add = () => {
     if (inputValue.trim() !== '') {
@@ -16,6 +16,7 @@ const [goalMax, setGoalMax] = useState([1]);
     const done = (index) => {
       setCompleted(prev => {
         if (prev.includes(index)) return prev; // already completed — no-op
+        if (prev.length >= goalMax) return prev; 
         confetti({
           particleCount: 150,
           spread: 80,
@@ -29,10 +30,11 @@ const [goalMax, setGoalMax] = useState([1]);
       setTasks(tasks.filter((_, i) => i !== index));
       setCompleted(completed.filter(i => i !== index));
     };
-  const onGoalChange = (e) => {
-    const value = Math.max(1, Number(e.target.value) || 1);
+  const onGoalChange = (f) => {
+    const value = Math.max(1, Number(f.target.value) || 1);
      setGoalMax(value);
   };
+ 
 return(
   <>
   <div className="Container">
@@ -40,18 +42,18 @@ return(
           <h1>Write your Tasks Below </h1>
         </div>
     <div className="content">
-      <input
-        type="text"
-        value={inputValue}
-        placeholder="Enter your Task Here"
-        onChange={e => setInputValue(e.target.value)}
-        onKeyDown={(e)=>{if(e.key==='Enter'){Add();}}}
-      />    
-      <button  onClick={Add}>Add</button>
+<input
+          type="text"
+          value={inputValue}
+          placeholder="Enter your Task Here"
+          onChange={e => setInputValue(e.target.value)}
+          onKeyDown={(a)=>{if(a.key==='Enter'){Add();}}}
+        />    
+<button  onClick={Add}>Add</button>
     </div>
-    {tasks.length > 0 && (
+    {tasks.length > 0 &&(
       <>
-      {tasks.map((task, index) => (
+      {tasks.map((task, index)=> (
         <div className={`Todo-list ${completed.includes(index) ? 'fade-out' : ''}`} key={index}>
           <ul>     
             <li>{task}</li>
@@ -64,7 +66,7 @@ return(
           <button
             className='complete'
             onClick={() => done(index)}
-            disabled={completed.includes(index)}
+            disabled={completed.includes(index)|| completed.length >= goalMax}
             aria-pressed={completed.includes(index)}
           >
             completed&nbsp;
