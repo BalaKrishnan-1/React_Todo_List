@@ -1,6 +1,7 @@
 import '../App.css';
 import { useState } from 'react';
-  function DataUI({ completed, goalMax,onGoalChange}) {
+import Progress from './ProgressChart.jsx';
+  function DataUI({ completed, goalMax,onGoalChange,deletedCount,ignoredCount}) {
 const radius = 45;
 const circumference = 2 * Math.PI * radius;
 
@@ -60,7 +61,14 @@ return (
     
   </>
 )}
-      </div></div>
+      </div>
+     <Progress
+          completedCount={completed.length}
+          deletedCount={deletedCount}
+          ignoredCount={ignoredCount}
+          goalMax={goalMax}
+        />
+      </div>
     </>
   );
 }
