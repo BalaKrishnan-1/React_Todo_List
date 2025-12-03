@@ -1,11 +1,11 @@
-import { useCallback, useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
-import DataUI from '../components/Data-UI.jsx';
-import ProgressChart from './ProgressChart.jsx';
-
+import { useCallback, useState, useEffect } from "react";
+import confetti from "canvas-confetti";
+import DataUI from "../components/Data-UI.jsx";
+import ProgressChart from "./ProgressChart.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 function Container() {
   const [tasks, setTasks] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [completed, setCompleted] = useState([]);
   const [ignored, setIgnored] = useState([]);
   const [goalMax, setGoalMax] = useState(10);
@@ -14,14 +14,14 @@ function Container() {
   const [ignoredCount, setIgnoredCount] = useState(0);
 
   const Add = () => {
-    if (inputValue.trim() !== '') {
+    if (inputValue.trim() !== "") {
       setTasks([...tasks, inputValue]);
-      setInputValue('');
+      setInputValue("");
     }
   };
 
   const done = (index) => {
-    setCompleted(prev => {
+    setCompleted((prev) => {
       if (prev.includes(index)) return prev; // already completed — no-op
       if (prev.length >= goalMax) return prev;
       confetti({
@@ -35,9 +35,9 @@ function Container() {
 
   const deleteTask = (index) => {
     setTasks(tasks.filter((_, i) => i !== index));
-    setCompleted(completed.filter(i => i !== index));
-    setIgnored(ignored.filter(i => i !== index));
-    setDeletedCount(prev => prev + 1);
+    setCompleted(completed.filter((i) => i !== index));
+    setIgnored(ignored.filter((i) => i !== index));
+    setDeletedCount((prev) => prev + 1);
   };
 
   const ignoredTask = (index) => {
@@ -52,14 +52,16 @@ function Container() {
     setTasks(reorderedTasks);
 
     // Update ignored indexes, adjusting indexes for shifted tasks
-    const newIgnored = ignored.map(i => (i > index ? i - 1 : i));
+    const newIgnored = ignored.map((i) => (i > index ? i - 1 : i));
     setIgnored([...newIgnored, reorderedTasks.length - 1]);
 
     // Remove ignored task index from completed if present, adjusting completed indexes as well
-    const newCompleted = completed.filter(i => i !== index).map(i => (i > index ? i - 1 : i));
+    const newCompleted = completed
+      .filter((i) => i !== index)
+      .map((i) => (i > index ? i - 1 : i));
     setCompleted(newCompleted);
 
-    setIgnoredCount(prev => prev + 1);
+    setIgnoredCount((prev) => prev + 1);
   };
 
   const onGoalChange = (e) => {
@@ -71,17 +73,16 @@ function Container() {
     if (completed.length === goalMax && !hasReachedGoal) {
       setHasReachedGoal(true);
       setTimeout(() => {
-        alert('Congrats!!!,You have reached your Daily goal!🎉🎉');
+        alert("Congrats!!!,You have reached your Daily goal!🎉🎉");
       }, 1000);
     }
   }, [completed.length, goalMax, hasReachedGoal]);
 
   return (
     <>
+   
       <div className="Container">
-        <div className="heading">
-          <h1>Write your Tasks Below </h1>
-        </div>
+        
         <div className="content">
           <input
             type="text"
@@ -89,63 +90,62 @@ function Container() {
             placeholder="Enter your Task Here"
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(a) => {
-              if (a.key === 'Enter') {
+              if (a.key === "Enter") {
                 Add();
               }
             }}
           />
-          <button onClick={Add}>Add</button>
-        </div>
-
-        {tasks.length > 0 && (
-          <>
-            {tasks.map((task, index) => (
-              <div
-                className={`Todo-list ${
-                  completed.includes(index)
-                    ? 'fade-out'
-                    : ''
-                }`}
-                key={index}
-              >
-                <ul>
-                  <li>{task}</li>
-                </ul>
-                <button className="delete" onClick={() => deleteTask(index)}>
-                  delete&nbsp;
+          <button className="Add" onClick={Add}>Add</button>
+        </div></div>
+     
+      {tasks.length > 0 && (
+        <>
+          {tasks.map((task, index) => (
+            <div
+              className={`taskbar align-items-center ${
+                completed.includes(index) ? "fade-out" : ""
+              }`}
+              key={index}
+            >
+              <ul className="task-text">
+                <li>{task}</li>
+              </ul>
+              <div className="taskbar-buttons">
+                <button className="delete item" onClick={() => deleteTask(index)}>
                   <i className="bi bi-trash3-fill"></i>
                 </button>
-                <button className="ignore" onClick={() => ignoredTask(index)}>
-                  ignore&nbsp;
+                <button
+                  className="ignore item"
+                  onClick={() => ignoredTask(index)}
+                >
                   <i className="bi bi-alarm-fill"></i>
                 </button>
-
                 <button
-                  className="complete"
+                  className="complete item"
                   onClick={() => done(index)}
-                  disabled={completed.includes(index) || completed.length >= goalMax}
+                  disabled={
+                    completed.includes(index) || completed.length >= goalMax
+                  }
                   aria-pressed={completed.includes(index)}
                 >
-                  completed&nbsp;
                   <i className="bi bi-check2-square"></i>
                 </button>
               </div>
-            ))}
-          </>
-        )}
-      </div>
-
+            </div>
+          ))}
+        </>
+        
+      )}
       <aside>
-        <DataUI 
-          completed={completed} 
-          goalMax={goalMax} 
-          onGoalChange={onGoalChange} 
-          deletedCount={deletedCount} 
-          ignoredCount={ignoredCount} 
+        <DataUI
+          completed={completed}
+          goalMax={goalMax}
+          onGoalChange={onGoalChange}
+          deletedCount={deletedCount}
+          ignoredCount={ignoredCount}
         />
       </aside>
     </>
   );
 }
-
 export default Container;

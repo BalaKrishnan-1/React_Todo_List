@@ -1,5 +1,6 @@
 import { Pie } from 'react-chartjs-2';
 import '../App.css';
+import { Colors } from 'chart.js';
 function ProgressChart({ completedCount,goalMax,deletedCount,ignoredCount}) {
 
   const progress = Math.min(completedCount, goalMax);
@@ -9,7 +10,7 @@ function ProgressChart({ completedCount,goalMax,deletedCount,ignoredCount}) {
     datasets: [
       {
         data: [completedCount,deletedCount,ignoredCount],
-        backgroundColor: ['rgb(54, 162, 235)','rgba(255, 12, 12, 1)','rgb(255, 205, 86)'],hoverOffset: 4,
+        backgroundColor: ['#a0e92aff','#ff2b2b ','#ffb730'],hoverOffset: 4,
         borderWidth: 0,
       },
     ],
@@ -27,6 +28,7 @@ function ProgressChart({ completedCount,goalMax,deletedCount,ignoredCount}) {
           font: {
             size: 12,
           },
+          color: '#000',
         },
         position: 'top',
       },
