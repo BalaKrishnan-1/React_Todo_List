@@ -4,6 +4,7 @@
   box-sizing: border-box;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+/* Light Theme Variables */
  html[data-theme="light"] {
   --background:#fff;
   --nav-color:#fff;
@@ -17,30 +18,40 @@
   --Light-green:#d8d174;
   --grey-dust: #f6fedb;
 }
+/* Dark Theme Variables */
  html[data-theme="dark"]
   {
-    --background:#121212;
+    --background:#1d2125;
     --text-color:#fff;;
     --btn-color:#fff;
     --btn-text:#000;
      --ul-color:#fff;
-     --card-color:#AED6CF;
-      --bar-color:#6D94C5;
+     --card-color:#7d27f5;
+      --bar-color:#FF2DD1;
   --foreground-color: #3a3a3a;
   }
+  /*Font Import*/
+@font-face {
+  font-family: "Merriweather-Bold";
+  src: url("./assets/fonts/Merriweather_48pt-Bold.woff") format("woff");
+  font-weight:900;
+}
+
+
   html,body{
     background-color: var(--background);
   }
   html[data-theme="dark"] .nav {
   background-color:#3a3a3a40;
-
   }
- 
+  html[data-theme="dark"] .content {
+  background:linear-gradient(90deg, #279ff5, #2738f5, #7d27f5);
+  }
 .nav {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding:20px;
   box-sizing: border-box;
   box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
 }
@@ -65,6 +76,13 @@ body,aside{
    background-color: var(--background)!important;
   scroll-behavior: smooth;
 }
+.Display-1{
+  font-family: "Merriweather-Bold", serif;
+  font-size:72px;
+  text-align: center;
+  margin-top: 100px;
+  color: var(--text-color);
+}
 .Container {
   position:relative;
   left: 20px;
@@ -72,7 +90,6 @@ body,aside{
   height:100%;
   max-width:50%;
   border-radius: 20px;
-  background-color:var(--card-color) ;
   box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.1);
 }
 .content {
@@ -287,12 +304,64 @@ input[type="number"] {
     display: none;
   }
 }
+.hamburger {
+  display: none;
+}
+.close-btn {
+  display: none;
+}
 @media screen and (max-width: 768px) {
+  .nav{
+    height:100%;
+    padding:20px;
+  }
+   .hamburger {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--ul-color);
+    margin-left: auto;
+    margin-right: 10px;
+  }
+  ul.link a{
+  font-size: 1.5rem;
+  color:var(--text-color);
+  text-decoration: none;
+  gap:1.5rem;
+}
+  ul.link {
+    display: none !important;
+  }
+  ul.open{
+    display: flex !important;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center!important;
+    position: absolute;
+    padding:30px;
+    width:96%;
+    height:500px;
+    top:25%;
+    left:2%;
+    background-color:#12121280!important;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition:0.5s ease-in-out;
+  }
+ .close-btn {
+    display: block;
+    color:var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 35px;
+    right:40px;
+  }
   .Container {
     width: 100%;
     height: 100%;
-    max-width: 95%;
-    margin: 50px auto;
+    max-width: 92%;
   }
   .content {
     display: flex;
@@ -321,10 +390,12 @@ input[type="number"] {
   padding: 20px;
   margin-top: 20px;
   margin-left: 20px;
+   margin-right:20px;
   border-radius: 10px;
   background-color: var(--foreground-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+ 
 }
 @media screen and (max-width: 478px) {
   h1 {
@@ -339,8 +410,7 @@ input[type="number"] {
   .Container {
     width: 100%;
     height: 100%;
-    max-width: 95%;
-    margin: 50px auto;
+    max-width: 90%;
   }
   .content {
     display: flex;
@@ -368,12 +438,13 @@ input[type="number"] {
   padding: 20px;
   margin-top: 20px;
   margin-left: 20px;
+  margin-right:20px;
   border-radius: 10px;
   background-color: var(--foreground-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
   .delete,
-  .complete {
+  .complete,.ignore {
     width: 100%;
   }
 }

@@ -1,0 +1,5 @@
+- [x] Modify Navbar.jsx to use React state for menu toggle instead of DOM manipulation
+- [x] Conditionally render close button inside ul when menu is open
+- [x] Update open/close functions to use state
+- [x] Adjust CSS in App.css: remove absolute positioning for close-btn, style it inside ul
+- [ ] Test mobile menu functionality
