@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   Title,
+  scales,
 } from 'chart.js';
 
 ChartJS.register(
@@ -20,5 +21,6 @@ ChartJS.register(
   BarElement,
   Tooltip,
   Legend,
-  Title
+  Title,
+  scales,
 );

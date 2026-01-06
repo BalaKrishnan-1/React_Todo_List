@@ -1,8 +1,12 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect,useRef} from "react";
 import confetti from "canvas-confetti";
 import DataUI from "../components/Data-UI.jsx";
-import ProgressChart from "./ProgressChart.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import gsap from "gsap"; 
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+gsap.registerPlugin(ScrollToPlugin);
+
+
 function Container() {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -12,6 +16,9 @@ function Container() {
   const [hasReachedGoal, setHasReachedGoal] = useState(false);
   const [deletedCount, setDeletedCount] = useState(0);
   const [ignoredCount, setIgnoredCount] = useState(0);
+  const [editingIndex, setEditingIndex] = useState(null); 
+  const [editingValue, setEditingValue] = useState('');
+
 
   const Add = () => {
     if (inputValue.trim() !== "") {
@@ -69,6 +76,26 @@ function Container() {
     setGoalMax(value);
   };
 
+  const editTask = (index) => {
+    setEditingIndex(index);
+    setEditingValue(tasks[index]);
+  };
+
+  const saveEdit = () => {
+    if (editingValue.trim() !== "") {
+      const updatedTasks = [...tasks];
+      updatedTasks[editingIndex] = editingValue;
+      setTasks(updatedTasks);
+      setEditingIndex(null);
+      setEditingValue("");
+    }
+  };
+
+  const cancelEdit = () => {
+    setEditingIndex(null);
+    setEditingValue("");
+  };
+
   useEffect(() => {
     if (completed.length === goalMax && !hasReachedGoal) {
       setHasReachedGoal(true);
@@ -77,12 +104,10 @@ function Container() {
       }, 1000);
     }
   }, [completed.length, goalMax, hasReachedGoal]);
-
   return (
     <>
-   
+      <div className="All" id="all">
       <div className="Container">
-        
         <div className="content">
           <input
             type="text"
@@ -108,15 +133,34 @@ function Container() {
               key={index}
             >
               <ul className="task-text">
-                <li>{task}</li>
+                <li>
+                  {editingIndex === index ? (
+                    <input
+                      type="text"
+                      value={editingValue}
+                      onChange={(e) => setEditingValue(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") saveEdit();
+                        if (e.key === "Escape") cancelEdit();
+                      }}
+                      autoFocus
+                    />
+                  ) : (
+                    task
+                  )}
+                </li>
               </ul>
               <div className="taskbar-buttons">
+                <button className="edit item" onClick={() => editTask(index)}>
+                  <i className="bi bi-pencil-fill"></i>
+                </button>
                 <button className="delete item" onClick={() => deleteTask(index)}>
                   <i className="bi bi-trash3-fill"></i>
                 </button>
                 <button
                   className="ignore item"
                   onClick={() => ignoredTask(index)}
+                  disabled={index === tasks.length - 1}
                 >
                   <i className="bi bi-alarm-fill"></i>
                 </button>
@@ -145,6 +189,7 @@ function Container() {
           ignoredCount={ignoredCount}
         />
       </aside>
+</div>
     </>
   );
 }

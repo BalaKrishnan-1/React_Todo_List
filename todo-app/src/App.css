@@ -4,6 +4,12 @@
   box-sizing: border-box;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+body::-webkit-scrollbar {
+    display: none;
+}
+html,body{
+   scrollbar-width: none;  
+}
 /* Light Theme Variables */
  html[data-theme="light"] {
   --background:#fff;
@@ -17,6 +23,7 @@
   --bar-color:#aea63f;
   --Light-green:#d8d174;
   --grey-dust: #f6fedb;
+  --blood:#880808FF;
 }
 /* Dark Theme Variables */
  html[data-theme="dark"]
@@ -28,7 +35,8 @@
      --ul-color:#fff;
      --card-color:#7d27f5;
       --bar-color:#FF2DD1;
-  --foreground-color: #3a3a3a;
+   --foreground-color: #3a3a3a;
+   --blood:red;
   }
   /*Font Import*/
 @font-face {
@@ -36,8 +44,6 @@
   src: url("./assets/fonts/Merriweather_48pt-Bold.woff") format("woff");
   font-weight:900;
 }
-
-
   html,body{
     background-color: var(--background);
   }
@@ -76,11 +82,79 @@ body,aside{
    background-color: var(--background)!important;
   scroll-behavior: smooth;
 }
-.Display-1{
-  font-family: "Merriweather-Bold", serif;
-  font-size:72px;
+.UI{
+   width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  margin-top: 100px;
+}
+.Typo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Merriweather-Bold", serif;
+  font-size:5px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: var(--text-color);
+}
+.word-now,
+        .word-r {
+          animation: scaleText 5s forwards cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .loop {
+           background: linear-gradient(to bottom right,var(--blood) ,var(--blood));
+           background-clip: text;
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           animation: scaleO 5s forwards cubic-bezier(0.4, 0, 0.2, 1) ;
+        }
+        
+        @keyframes scaleText {
+          0% {
+            font-size: 5px;
+            opacity: 1;
+          }
+          70% {
+            font-size: 150px;
+             opacity: 0;
+          }
+          100%{
+            opacity: 0;
+          }
+        }
+        @keyframes scaleO {
+          0% {
+            font-size: 5px;
+            transform: scale(1);
+            
+          }
+          70% {
+            font-size: 150px;
+            margin-left:450px;
+            margin-right:200px;
+            transform: scale(1);
+          }
+          100% {
+            font-size: 200px;
+            transform: scale(25);  
+            transition: all ease-in;
+            display: none;
+          }
+        
+        }   
+.main-p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Merriweather-Bold", serif;
+  font-size:75px;
+  font-weight: bold;
+  white-space: nowrap;
+  height: 100vh;
   color: var(--text-color);
 }
 .Container {
@@ -134,9 +208,9 @@ input[type="number"] {
 }
 
 .Sidebar {
-  position: absolute;
+  position:absolute;
   right: 20px;
-  top: 140px;
+  top:200px;
   padding: 20px;
   z-index: 1000;
   border-radius: 20px;
@@ -254,6 +328,17 @@ input[type="number"] {
   justify-content: flex-start;
   align-items: center;
 }
+.edit{
+  background-color: #40c9cc !important;
+  padding: 10px 20px !important;
+  color:#fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 .delete {
   background-color: #ff2b2b !important;
   padding: 10px 20px !important;
@@ -310,6 +395,20 @@ input[type="number"] {
 .close-btn {
   display: none;
 }
+
+.line{
+  display: flex;
+  height:400px;
+  justify-content: center;
+}
+.chart-title{
+  color:var(--text-color);
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+ margin-top: 100px;
+}
+
 @media screen and (max-width: 768px) {
   .nav{
     height:100%;
@@ -358,6 +457,16 @@ input[type="number"] {
     top: 35px;
     right:40px;
   }
+.main-p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Merriweather-Bold", serif;
+  font-size:65px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: var(--text-color);
+}
   .Container {
     width: 100%;
     height: 100%;
@@ -395,9 +504,86 @@ input[type="number"] {
   background-color: var(--foreground-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
- 
+  .line {
+    max-width: 100%;
+    height: 300px;
+    padding: 10px;
+  }
 }
 @media screen and (max-width: 478px) {
+.main-p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Merriweather-Bold", serif;
+  font-size:45px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: var(--text-color);
+}
+.UI{
+  height:auto;
+  margin-top: 300px !important;
+}
+.Typo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Merriweather-Bold", serif;
+  font-size:5px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: var(--text-color);
+}
+ .line {
+    height: 250px;
+  }
+.word-now,
+        .word-r {
+          animation: scaleText 5s forwards cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .loop {
+           background: linear-gradient(to bottom right,var(--blood) ,var(--blood));
+           background-clip: text;
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           animation: scaleO 5s forwards cubic-bezier(0.4, 0, 0.2, 1) ;
+        }
+        
+        @keyframes scaleText {
+          0% {
+            font-size: 5px;
+            opacity: 1;
+          }
+          70% {
+            font-size: 80px;
+             opacity: 0;
+          }
+          100%{
+            opacity: 0;
+          }
+        }
+        @keyframes scaleO {
+          0% {
+            font-size: 5px;
+            transform: scale(1);
+            
+          }
+          70% {
+            font-size: 80px;
+            margin-left:320px;
+            margin-right:150px;
+            transform: scale(1);
+          }
+          100% {
+            font-size: 100px;
+            transform: scale(25);  
+            transition: all ease-in;
+            display: none;
+          }
+        
+        }
   h1 {
     font-size: 1.2rem;
     margin-top: 50px;

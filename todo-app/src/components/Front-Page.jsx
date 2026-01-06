@@ -1,21 +1,36 @@
-import { useEffect,useState,useCallback } from "react";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import '../App.css';
-import { BrowserRouter,Link,Routes, Route } from "react-router-dom";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from './Navbar.jsx';
 
-function FrontPage() {
-return(
-<>
-<div className="front-page">
-<p className="Display-1 text-center">You don't have&nbsp;to&nbsp;see the whole staircase&nbsp;just take the first step.
-</p>
-<div className="start-btn text-center mt-5">
-  <Link to="/Main" className="btn btn-outline-info animation-pulse btn-lg">Get Started</Link>   
-</div>
-</div>
-</>
-);
+function Timeline() {
+
+const navigate = useNavigate();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/Main'); // React Router navigation
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+  // ... rest of code
+
+  return (
+    <div className="Timeline">
+    <div className="UI lg-mt-5 md-mt-5" >
+        <p className="Typo"> 
+        <span className="word-now">NOW</span>
+        <span className="loop">O</span>
+        <span className="word-r">R NEVER</span></p>
+      </div>
+      </div>
+  );
 }
-export default FrontPage;
+
+export default function FrontPage() {
+  return (
+    <>
+      <Timeline />
+    </>
+  );
+}

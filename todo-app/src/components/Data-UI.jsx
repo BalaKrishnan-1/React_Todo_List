@@ -1,7 +1,7 @@
 import '../App.css';
 import { useState } from 'react';
-import Progress from './ProgressChart.jsx';
-  function DataUI({ completed, goalMax,onGoalChange,deletedCount,ignoredCount}) {
+import Progress from './Doughnut.jsx';
+function DataUI({ completed, goalMax,onGoalChange,deletedCount,ignoredCount}) {
 const radius = 45;
 const circumference = 2 * Math.PI * radius;
 

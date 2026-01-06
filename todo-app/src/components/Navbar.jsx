@@ -25,9 +25,9 @@ useEffect(()=>{
   };
     return (
 <>
-   <nav className="nav d-flex w-100">
+   <nav className="nav d-flex w-100" >
       <div className="nav-brand ms-4">
-         <Link to="./Front-Page">Todo</Link>
+         <Link to="/">Todo</Link>
         </div>
       <ul className={`link d-flex align-items-center mx-auto ${isMenuOpen ? 'open' : ''}`}>
         {isMenuOpen && <i className="close-btn bi bi-x-lg" onClick={close}></i>}

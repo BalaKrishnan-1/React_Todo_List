@@ -1,5 +1,4 @@
-- [x] Modify Navbar.jsx to use React state for menu toggle instead of DOM manipulation
-- [x] Conditionally render close button inside ul when menu is open
-- [x] Update open/close functions to use state
-- [x] Adjust CSS in App.css: remove absolute positioning for close-btn, style it inside ul
-- [ ] Test mobile menu functionality
+# TODO List for Disabling Ignore Button for Last Task
+
+- [x] Update the ignore button in Main.jsx to be disabled when it's the last task (index === tasks.length - 1)
+- [x] Test the application to ensure the ignore button is disabled for the last task
