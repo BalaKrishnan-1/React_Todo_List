@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.8221056a.css",
-    "main.js": "/static/js/main.084b4a62.js",
+    "main.css": "/static/css/main.c03c750e.css",
+    "main.js": "/static/js/main.555da880.js",
+    "static/media/Merriweather_48pt-Bold.woff": "/static/media/Merriweather_48pt-Bold.94bc4f9bd0a41fc9ac3d.woff",
     "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.1295669cd4e305c97f2c.woff",
     "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.92ea18a81d737146ff04.woff2",
     "index.html": "/index.html",
-    "main.8221056a.css.map": "/static/css/main.8221056a.css.map",
-    "main.084b4a62.js.map": "/static/js/main.084b4a62.js.map"
+    "main.c03c750e.css.map": "/static/css/main.c03c750e.css.map",
+    "main.555da880.js.map": "/static/js/main.555da880.js.map"
   },
   "entrypoints": [
-    "static/css/main.8221056a.css",
-    "static/js/main.084b4a62.js"
+    "static/css/main.c03c750e.css",
+    "static/js/main.555da880.js"
   ]
 }
