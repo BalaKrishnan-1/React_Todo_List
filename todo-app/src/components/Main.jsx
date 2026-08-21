@@ -139,6 +139,7 @@ function Container() {
                       type="text"
                       value={editingValue}
                       onChange={(e) => setEditingValue(e.target.value)}
+                      onBlur={saveEdit}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") saveEdit();
                         if (e.key === "Escape") cancelEdit();
